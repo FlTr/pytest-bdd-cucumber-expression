@@ -1,0 +1,189 @@
+[project]
+name = "pytest-bdd-cucumber-expression"
+version = "0.1.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
+    "Framework :: Pytest",
+    "Topic :: Software Development :: Testing :: BDD",
+]
+description = "pytest-bdd with native cucumber expression support"
+keywords = ["pytest", "bdd", "cucumber expression"]
+dependencies = ["cucumber-expressions ~= 18.0", "pytest-bdd ~= 8.1"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/FlTr/pytest-bdd-cucumber-expression"
+Issues = "https://github.com/FlTr/pytest-bdd-cucumber-expression/issues"
+Repository = "https://github.com/FlTr/pytest-bdd-cucumber-expression.git"
+Changelog = "https://github.com/FlTr/pytest-bdd-cucumber-expression/blob/main/CHANGELOG.md"
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+
+[dependency-groups]
+all = [
+    { include-group = "dev" },
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "typecheck" },
+]
+dev = ["bump-my-version", "tox", "tox-uv"]
+lint = ["ruff"]
+test = ["pytest", "pytest-cov"]
+typecheck = ["mypy[reports]"]
+
+### COVERAGE ###
+
+[tool.coverage.html]
+directory = "_build/htmlcov"
+
+[tool.coverage.paths]
+source = ["src/", ".tox/py*/Lib/site-packages"]
+
+[tool.coverage.report]
+exclude_also = [
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+fail_under = 100
+show_missing = true
+
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["src"]
+
+### MYPY ###
+
+[tool.mypy]
+html_report = "_build/htmlmypy"
+
+[[tool.mypy.overrides]]
+follow_untyped_imports = true
+module = ["cucumber_expressions.*"]
+
+### PYTEST ###
+
+[tool.pytest.ini_options]
+addopts = "-p pytest_cov --cov=pytest_bdd_cucumber_expression --strict-markers"
+
+### RUFF ###
+
+[tool.ruff]
+src = ["src"]
+
+[tool.ruff.lint]
+preview = true
+explicit-preview-rules = true
+pydocstyle.convention = "google"
+select = ["ALL"]
+extend-select = ["DOC201", "DOC202", "DOC402", "DOC403", "DOC501", "DOC502"]
+ignore = [
+    "D107", # __init__ description shall be done in class docstring
+]
+isort.required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.lint.per-file-ignores]
+# exceptions for tests
+"tests/*" = ["D", "DOC"]
+"tests/test_*" = [
+    "ANN",     # no type hints
+    "I002",    # no type hints
+    "PLR0913", # amount of arguments depends on fixtures/mocks
+    "PLR2004", # allow magic numbers
+    "TC",      # no typecheck
+]
+
+### TOX ###
+
+[tool.tox]
+env_list = ["clean", "coverage", "lint", "py312", "typecheck"]
+min_version = "4.22"
+
+[tool.tox.env.clean]
+commands = [["coverage", "erase"]]
+deps = ["coverage[toml]"]
+skip_install = true
+
+[tool.tox.env.coverage]
+commands = [
+    [
+        "coverage",
+        "combine",
+    ],
+    [
+        "-",
+        "coverage",
+        "xml",
+    ],
+    [
+        "-",
+        "coverage",
+        "html",
+    ],
+    [
+        "coverage",
+        "report",
+    ],
+]
+depends = ["py312"]
+deps = ["coverage[toml]"]
+skip_install = true
+
+[tool.tox.env.py]
+dependency_groups = ["all"]
+package = "editable"
+
+[tool.tox.env.lint]
+commands = [["ruff", "format", "--check"], ["ruff", "check"]]
+dependency_groups = ["lint"]
+skip_install = true
+
+[tool.tox.env.typecheck]
+commands = [
+    [
+        "mypy",
+        "--junit-xml",
+        "_build{/}{env_name}_junit.xml",
+        "src",
+    ],
+    [
+        "-",
+        "mypy",
+        "--junit-xml",
+        "_build{/}{env_name}_strict_junit.xml",
+        "--strict",
+        "src",
+    ],
+]
+dependency_groups = ["typecheck"]
+
+[tool.tox.env.py312]
+commands = [
+    [
+        "pytest",
+        "--cov-fail-under=80",
+        "--junit-prefix",
+        "{env_name}",
+        "--junit-xml",
+        "_build{/}{env_name}_junit.xml",
+    ],
+]
+dependency_groups = ["test"]
+depends = ["clean"]
+set_env = { COVERAGE_FILE = ".coverage.{env_name}" }
