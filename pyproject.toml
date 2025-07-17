@@ -29,11 +29,21 @@ requires = ["setuptools >= 77.0.3"]
 [dependency-groups]
 all = [
     { include-group = "dev" },
+    { include-group = "docs" },
     { include-group = "lint" },
     { include-group = "test" },
     { include-group = "typecheck" },
 ]
 dev = ["bump-my-version", "tox", "tox-uv"]
+docs = [
+    "mkdocs",
+    "mkdocs-api-autonav",
+    "mkdocs-autorefs",
+    "mkdocs-material",
+    "mkdocstrings-python",
+    "pygments",
+    "pymdown-extensions",
+]
 lint = ["ruff"]
 test = ["pytest", "pytest-cov"]
 typecheck = ["mypy[reports]"]
@@ -145,14 +155,32 @@ depends = ["py312"]
 deps = ["coverage[toml]"]
 skip_install = true
 
-[tool.tox.env.py]
-dependency_groups = ["all"]
-package = "editable"
+[tool.tox.env.docs]
+commands = [["mkdocs", "build"]]
+dependency_groups = ["docs"]
+# skip_install = true
+
+[tool.tox.env.docs_deploy]
+commands = [
+    [
+        "mkdocs",
+        "gh-deploy",
+        "--clean",
+        "--message",
+        "\"Publish docs for {sha}\"",
+    ],
+]
+dependency_groups = ["docs"]
+skip_install = true
 
 [tool.tox.env.lint]
 commands = [["ruff", "format", "--check"], ["ruff", "check"]]
 dependency_groups = ["lint"]
 skip_install = true
+
+[tool.tox.env.py]
+dependency_groups = ["all"]
+package = "editable"
 
 [tool.tox.env.typecheck]
 commands = [
