@@ -41,6 +41,7 @@ docs = [
     "mkdocs-autorefs",
     "mkdocs-material",
     "mkdocstrings-python",
+    "pymarkdownlnt",
     "pygments",
     "pymdown-extensions",
 ]
@@ -87,6 +88,16 @@ html_report = "_build/htmlmypy"
 follow_untyped_imports = true
 module = ["cucumber_expressions.*"]
 
+### PYMARKDOWN ###
+
+[tool.pymarkdown.extensions]
+front-matter.enabled = true
+markdown-strikethrough.enabled = true
+markdown-task-list-items.enabled = true
+
+[tool.pymarkdown.plugins]
+MD013.enabled = false   # line-length # use one sentence per line
+
 ### PYTEST ###
 
 [tool.pytest.ini_options]
@@ -122,12 +133,13 @@ isort.required-imports = ["from __future__ import annotations"]
 ### TOX ###
 
 [tool.tox]
-env_list = ["clean", "coverage", "lint", "py312", "typecheck"]
+env_list = ["clean", "coverage", "docs", "lint", "py312", "typecheck"]
 min_version = "4.22"
 
 [tool.tox.env.clean]
 commands = [["coverage", "erase"]]
 deps = ["coverage[toml]"]
+description = "Clean coverage database."
 skip_install = true
 
 [tool.tox.env.coverage]
@@ -153,14 +165,10 @@ commands = [
 ]
 depends = ["py312"]
 deps = ["coverage[toml]"]
+description = "Collect coverage and generate reports."
 skip_install = true
 
-[tool.tox.env.docs]
-commands = [["mkdocs", "build"]]
-dependency_groups = ["docs"]
-# skip_install = true
-
-[tool.tox.env.docs_deploy]
+[tool.tox.env.deploy]
 commands = [
     [
         "mkdocs",
@@ -171,16 +179,37 @@ commands = [
     ],
 ]
 dependency_groups = ["docs"]
+description = "Deploy to pypi and gh-pages."
+skip_install = true
+
+[tool.tox.env.docs]
+commands = [
+    [
+        "pymarkdown",
+        "scan",
+        "-e",
+        "venv",
+        "**/*.md",
+    ],
+    [
+        "mkdocs",
+        "build",
+    ],
+]
+dependency_groups = ["docs"]
+description = "Generate documentation."
 skip_install = true
 
 [tool.tox.env.lint]
 commands = [["ruff", "format", "--check"], ["ruff", "check"]]
 dependency_groups = ["lint"]
+description = "Run code linter."
 skip_install = true
 
 [tool.tox.env.py]
 dependency_groups = ["all"]
 package = "editable"
+description = "Development environment."
 
 [tool.tox.env.typecheck]
 commands = [
@@ -200,6 +229,7 @@ commands = [
     ],
 ]
 dependency_groups = ["typecheck"]
+description = "Run static typechecker."
 
 [tool.tox.env.py312]
 commands = [
@@ -214,4 +244,5 @@ commands = [
 ]
 dependency_groups = ["test"]
 depends = ["clean"]
+description = "Run tests."
 set_env = { COVERAGE_FILE = ".coverage.{env_name}" }
