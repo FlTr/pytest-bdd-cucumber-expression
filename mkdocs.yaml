@@ -1,0 +1,62 @@
+site_name: Python BDD with Cucumber Expressions
+site_description: pytest-bdd with Cucumber Expressions
+site_url: https://fltr.github.io/python-bdd-cucumber-expression
+
+copyright: Copyright &copy; 2025 FlTr
+
+repo_url: https://github.com/FlTr/pytest-bdd-cucumber-expression
+
+site_dir: _build/site
+use_directory_urls: true
+
+strict: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.blocks.admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.saneheaders
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist
+  - meta
+  - sane_lists
+  - smarty
+  - tables
+
+plugins:
+  - api-autonav:
+      modules: ["src/pytest_bdd_cucumber_expression"]
+  - autorefs
+  - search:
+      lang:
+        - en
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+
+nav:
+  - Home: "index.md"
+  - Changelog: "history.md"
+
+theme:
+  name: material
+  locale: en
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.expand
+    - content.code.copy
+    - toc.follow
+    - toc.integrate
+    - search.suggest
+    - search.highlight
