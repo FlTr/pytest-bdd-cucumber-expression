@@ -17,6 +17,9 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 
+[project.entry-points.pytest11]
+pytest-bdd-cucumber-expression = "pytest_bdd_cucumber_expression.plugin"
+
 [project.urls]
 Homepage = "https://github.com/FlTr/pytest-bdd-cucumber-expression"
 Issues = "https://github.com/FlTr/pytest-bdd-cucumber-expression/issues"
