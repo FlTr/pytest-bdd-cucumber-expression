@@ -2,18 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://fltr.github.io/python-bdd-cucumber-expression/</loc>
-         <lastmod>2025-07-17</lastmod>
+         <lastmod>2025-07-18</lastmod>
     </url>
     <url>
          <loc>https://fltr.github.io/python-bdd-cucumber-expression/history/</loc>
-         <lastmod>2025-07-17</lastmod>
+         <lastmod>2025-07-18</lastmod>
     </url>
     <url>
          <loc>https://fltr.github.io/python-bdd-cucumber-expression/reference/pytest_bdd_cucumber_expression/</loc>
-         <lastmod>2025-07-17</lastmod>
+         <lastmod>2025-07-18</lastmod>
+    </url>
+    <url>
+         <loc>https://fltr.github.io/python-bdd-cucumber-expression/reference/pytest_bdd_cucumber_expression/hooks/</loc>
+         <lastmod>2025-07-18</lastmod>
     </url>
     <url>
          <loc>https://fltr.github.io/python-bdd-cucumber-expression/reference/pytest_bdd_cucumber_expression/parser/</loc>
-         <lastmod>2025-07-17</lastmod>
+         <lastmod>2025-07-18</lastmod>
+    </url>
+    <url>
+         <loc>https://fltr.github.io/python-bdd-cucumber-expression/reference/pytest_bdd_cucumber_expression/plugin/</loc>
+         <lastmod>2025-07-18</lastmod>
     </url>
 </urlset>

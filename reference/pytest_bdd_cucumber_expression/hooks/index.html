@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://fltr.github.io/python-bdd-cucumber-expression/reference/pytest_bdd_cucumber_expression/parser/">
+        <link rel="canonical" href="https://fltr.github.io/python-bdd-cucumber-expression/reference/pytest_bdd_cucumber_expression/hooks/">
       
       
-        <link rel="prev" href="../hooks/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../plugin/">
+        <link rel="next" href="../parser/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>pytest_bdd_cucumber_expression.parser - Python BDD with Cucumber Expressions</title>
+        <title>pytest_bdd_cucumber_expression.hooks - Python BDD with Cucumber Expressions</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pytest_bdd_cucumber_expression.parser" class="md-skip">
+        <a href="#pytest_bdd_cucumber_expression.hooks" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              pytest_bdd_cucumber_expression.parser
+              pytest_bdd_cucumber_expression.hooks
             
           </span>
         </div>
@@ -464,29 +464,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../hooks/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>hooks
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -502,7 +479,7 @@
   
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>parser
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>hooks
     
   </span>
   
@@ -515,7 +492,7 @@
   
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>parser
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>hooks
     
   </span>
   
@@ -536,18 +513,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pytest_bdd_cucumber_expression.parser" class="md-nav__link">
+  <a href="#pytest_bdd_cucumber_expression.hooks" class="md-nav__link">
     <span class="md-ellipsis">
-      parser
+      hooks
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#pytest_bdd_cucumber_expression.parser.CucumberExpressionParser" class="md-nav__link">
+  <a href="#pytest_bdd_cucumber_expression.hooks.pytest_bdd_cucumber_expression_param_types" class="md-nav__link">
     <span class="md-ellipsis">
-      CucumberExpressionParser
+      pytest_bdd_cucumber_expression_param_types
     </span>
   </a>
   
@@ -557,6 +534,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>parser
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -616,16 +616,16 @@
 
 
 
-  <h1><code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>parser</h1>
+  <h1><code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>hooks</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="pytest_bdd_cucumber_expression.parser"></a>
+<a id="pytest_bdd_cucumber_expression.hooks"></a>
     <div class="doc doc-contents first">
 
-        <p>Wrap the cucumber expression into a StepParser.</p>
+        <p>Declaration of plugin hooks.</p>
 
 
 
@@ -644,98 +644,47 @@
 
 
 
-<div class="doc doc-object doc-class">
+
+<div class="doc doc-object doc-function">
 
 
-
-<h2 id="pytest_bdd_cucumber_expression.parser.CucumberExpressionParser" class="doc doc-heading">
-            <code>CucumberExpressionParser</code>
-
+<h2 id="pytest_bdd_cucumber_expression.hooks.pytest_bdd_cucumber_expression_param_types" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">pytest_bdd_cucumber_expression_param_types</span><span class="p">()</span></code>
 
 </h2>
 
 
     <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code><span title="pytest_bdd.parsers.StepParser">StepParser</span></code></p>
+
+        <p>Define additional custom Cucumber Expression parameter types.</p>
 
 
-        <p>A StepParser for Cucumber Expressions.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
+    <p><span class="doc-section-title">Returns:</span></p>
     <table>
       <thead>
         <tr>
-          <th>Name</th>
           <th>Type</th>
           <th>Description</th>
-          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>name</code>
-            </td>
-            <td>
-                  <code><span title="str">str</span></code>
+                  <code><span title="set">set</span>[<span title="cucumber_expressions.parameter_type.ParameterType">ParameterType</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The step text.</p>
+                <p>A set of custom parameter types.</p>
               </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>param_names</code>
-            </td>
-            <td>
-                  <code><span title="tuple">tuple</span>[<span title="str">str</span>, ...] | None</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>A tuple of expression argument names.</p>
-              </div>
-            </td>
-            <td>
-                  <code>None</code>
             </td>
           </tr>
       </tbody>
     </table>
 
 
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
     </div>
 
 </div>
-
 
 
 
