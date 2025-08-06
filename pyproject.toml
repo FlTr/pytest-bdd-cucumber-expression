@@ -1,6 +1,6 @@
 [project]
 name = "pytest-bdd-cucumber-expression"
-version = "0.1.0"
+version = "0.1.0.dev3"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Programming Language :: Python :: 3 :: Only",
